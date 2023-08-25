@@ -64,17 +64,17 @@ def analyze_log_file(log_file):
         json.dump(statistics, file, indent=4)
 
 
-# передача нужного файла и каталога
+# передача и поиск "нужного" файла - access*.log
 def analyze_logs(directory):
     for file in os.listdir(directory):
-        # вывод в консоль
-        print(f'*** Статистика из лога  "{file}" ***')
         if file.startswith("access"):
             if file.endswith(".log"):
+                # вывод в консоль
+                print(f'*** Статистика из лога  "{file}" ***')
                 file_path = os.path.join(directory, file)
                 analyze_log_file(file_path)
 
 
-# Передача каталога
-log_directory = 'C:\\access_test'
+# Передача каталога, откуда брать логи
+log_directory = str(input())
 analyze_logs(log_directory)
