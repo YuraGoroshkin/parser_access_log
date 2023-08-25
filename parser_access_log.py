@@ -17,13 +17,11 @@ def analyze_log_file(log_file):
         if not line:
             break
         request_count += 1
-        # регулярное выражение которое собрал https://regex101.com/r/4WTc1W/1
+        # регулярное выражение которое собрал https://regex101.com/r/4WTc1W/2
         regex = re.compile(
-            '(?P<ip>.*?) - - (?P<date_time>.*? *]) "(?P<metod>.*?) (?P<content>.*?") (?P<code>[0-9]{3}) (?P<server_byte>.*) "(?P<url>.*?)" (?P<user_agent>.*) (?P<duration>.*)')
-        if request_count > 3000000:
-            # Извлечение HTTP-метода
-            metod_line = regex.search(line).group('metod')
-        metod_line = "GET"
+            '(?P<ip>.*?)( . ..)(?P<date_time>.*? *]) "(?P<metod>.*?) (?P<content>.*?") (?P<code>[0-9]{3}) (?P<server_byte>.*) "(?P<url>.*?)" (?P<user_agent>.*) (?P<duration>.*)')
+        # Извлечение HTTP-метода
+        metod_line = regex.search(line).group('metod')
         if metod_line in http_methods:
             http_methods[metod_line] += 1
         else:
@@ -77,6 +75,6 @@ def analyze_logs(directory):
                 analyze_log_file(file_path)
 
 
-# Передача каталога, заменю потом на input
+# Передача каталога
 log_directory = 'C:\\access_test'
 analyze_logs(log_directory)
