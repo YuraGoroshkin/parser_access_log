@@ -76,5 +76,5 @@ def analyze_logs(directory):
 
 
 # Передача каталога, откуда брать логи
-log_directory = str(input())
+log_directory = str(input('Введите каталог откуда требуется обработать логи: '))
 analyze_logs(log_directory)
